@@ -27,7 +27,7 @@
                     <div class="mb-3 row">
                         <div class="col-sm-12 d-flex justify-content-center">
                             <div class="btn-group" role="group" aria-label="">
-                                <button type="button" class="btn btn-primary">+</button>
+                                <button type="button" onclick="calSum()" class="btn btn-primary">+</button>
                                 <button type="button" class="btn btn-primary">-</button>
                                 <button type="button" class="btn btn-primary">*</button>
                                 <button type="button" class="btn btn-primary">/</button>
@@ -47,5 +47,14 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+        <script type="text/javascript">
+            function calSum() {
+                let value1 = document.getElementById('value1').value;
+                let value2 = document.getElementById('value2').value;
+                const sum = parseInt(value1) + parseInt(value2);
+                document.getElementById('result').value = sum;
+            }
+        </script>
     </body>
 </html>
