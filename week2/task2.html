@@ -9,18 +9,28 @@
     </head>
     <body>
         <div class="container">
-            <div class="col-6 mt-5">
+            <div class="col-6 mt-5 text-center d-none" id="containerThank">
+                    <h1>Thank you for contacting us</h1>
+                    <p>We received your request and our team will contact you back within a day.</p>
+                    <button type="button" class="btn btn-primary" onclick="resend()">Re-Send</button>
+            </div>
+            <div class="col-6 mt-5" id="containerForm">
                 <h1 class="text-center">Contact Form</h1>
                 <form>
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Full Name *</label>
-                        <input type="text" class="form-control" id="fullName" onkeyup="checkFullName()">
+                        <input type="text" class="form-control" id="fullName" onkeyup="checkFormField('fullName')">
                         <div id="errFullName" class="form-text text-danger d-none">This field is required!</div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address *</label>
-                        <input type="email" class="form-control" id="email" onkeyup="checkEmail()">
+                        <input type="email" class="form-control" id="email" onkeyup="checkFormField('email')">
                         <div id="errEmail" class="form-text text-danger d-none">This field is required!</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone *</label>
+                        <input type="text" class="form-control" id="phone" onkeyup="checkFormField('phone')">
+                        <div id="errMyPhone" class="form-text text-danger d-none">This field is required!</div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Message</label>
@@ -38,29 +48,68 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
         <script type="text/javascript">
-            function checkFullName() {
-                const fullName = document.getElementById('fullName').value;
-                const errFullName = document.getElementById('errFullName');
-                if (fullName === '') {
-                    errFullName.className = 'form-text text-danger';
-                } else {
-                    errFullName.className = 'form-text text-danger d-none';
-                }
-            }
+            // function checkFullName() {
+            //     const fullName = document.getElementById('fullName').value;
+            //     const errFullName = document.getElementById('errFullName');
+            //     if (fullName === '') {
+            //         errFullName.className = 'form-text text-danger';
+            //     } else {
+            //         errFullName.className = 'form-text text-danger d-none';
+            //     }
+            // }
 
-            function checkEmail() {
-                const element = document.getElementById('email').value;
-                const errField = document.getElementById('errEmail');
+            // function checkEmail() {
+            //     const element = document.getElementById('email').value;
+            //     const errField = document.getElementById('errEmail');
+            //     if (element === '') {
+            //         errField.className = 'form-text text-danger';
+            //     } else {
+            //         errField.className = 'form-text text-danger d-none';
+            //     }
+            // }
+
+            function checkFormField(fieldId, errorField = '') {
+                const element = document.getElementById(fieldId).value;
+                let errorFieldId = errorField;
+                if (errorField === '') {
+                    errorFieldId = 'err' + fieldId.charAt(0).toUpperCase() + fieldId.substr(1);
+                }
+                
+                let isError = false;
+                const errField = document.getElementById(errorFieldId);
                 if (element === '') {
                     errField.className = 'form-text text-danger';
+                    isError = true;
                 } else {
                     errField.className = 'form-text text-danger d-none';
+                    isError = false;
                 }
+                return isError;
             }
 
             function onSubmit() {
-                checkFullName();
-                checkEmail();
+                // checkFullName();
+                // checkEmail();
+
+                const isErrorFullName = checkFormField('fullName');
+                const isErrorEmail = checkFormField('email');
+                const isErrorPhone = checkFormField('phone', 'errMyPhone');
+                if (
+                    isErrorFullName || 
+                    isErrorEmail ||
+                    isErrorPhone
+                ) {
+                    document.getElementById('containerForm').classList.remove('d-none');
+                    document.getElementById('containerThank').classList.add('d-none');
+                } else {
+                    document.getElementById('containerForm').classList.add('d-none');
+                    document.getElementById('containerThank').classList.remove('d-none');
+                }
+            }
+
+            function resend() {
+                document.getElementById('containerForm').classList.remove('d-none');
+                document.getElementById('containerThank').classList.add('d-none');
             }
         </script>
     </body>
