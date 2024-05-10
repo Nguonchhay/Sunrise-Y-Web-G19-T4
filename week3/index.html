@@ -41,7 +41,7 @@
                                 + New
                             </button>
                             
-                            <!-- Modal -->
+                            <!-- Modal Create -->
                             <div class="modal fade" id="modalNewToDo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNewToDoLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
@@ -70,6 +70,46 @@
                                     <button type="button" class="btn btn-primary" onclick="createToDoItem()">Save</button>
                                     </div>
                                 </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Update -->
+                            <div class="modal fade" id="modalEditToDo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditToDoLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="modalEditToDoLabel">Edit ToDo Item</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                <label for="editId" class="form-label">ID</label>
+                                                <input type="text" disabled class="form-control" id="editId">
+                                                </div>
+                                                <div class="mb-3">
+                                                <label for="eidtTitle" class="form-label">Title *</label>
+                                                <input type="text" class="form-control" id="editTitle">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editDueDate" class="form-label">Due Date *</label>
+                                                    <input type="datetime-local" class="form-control" id="editDueDate">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editStatus" class="form-label">Status *</label>
+                                                    <select class="form-control" id="editStatus">
+                                                        <option value="TO DO">TO DO</option>
+                                                        <option value="IN PROGRESS">IN PROGRESS</option>
+                                                        <option value="CLOSED">CLOSED</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="btnEditToDo" value="" onclick="editToDoItem(this)">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </th>
