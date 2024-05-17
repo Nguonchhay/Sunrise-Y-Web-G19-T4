@@ -1,4 +1,4 @@
-var todoId = 1;
+var todoId = 0;
 
 const BASE_URL = 'https://coding-fairy.com/api/mock-api-resources/1715945679';
 
@@ -19,28 +19,25 @@ const API_POST = async (path, postData) => {
     });
 }
 
-const API_UPDATE = (todoItem) => {
-    
+const API_UPDATE = async (path, updateData) => {
+    const url = `${BASE_URL}/${path}`;
+    return await $.ajax({
+        url,
+        type: 'PUT',
+        data: updateData
+    });
 }
 
-const API_DELETE = (todoId) => {
-
-}
-
-const readToDoData = async () => {
-    const toDoList = await API_GET('todos');
-    if (toDoList === null || toDoList === '') {
-        return [];
-    }
-    return toDoList;
-}
-
-const writeToDoData = toDoList => {
-    localStorage.setItem('todo', JSON.stringify(toDoList));
+const API_DELETE = async (path) => {
+    const url = `${BASE_URL}/${path}`;
+    return await $.ajax({
+        url,
+        type: 'DELETE'
+    });
 }
 
 const loadDataToToDoTable = () => {
-    const toDoList = readToDoData();
+    const toDoList = API_GET('todos');
     toDoList.then(data => {
         for (toDoItem of data) {
             addNewRowToTable(toDoItem);
@@ -72,15 +69,10 @@ const displayEditToDoItemForm = toDoItem => {
 }
 
 const removeRowFromTable = selectedId => {
-    const todoData = readToDoData();
-    /**
-     * const remainToDo = todoData.filter((todo) => {
-     *  return todo.id !== selectedId;
-     * });
-     */
-    const remainToDo = todoData.filter(todo => todo.id !== selectedId);
-    writeToDoData(remainToDo);
-    window.location.reload();
+    const result = API_DELETE(`todos/${selectedId}`);
+    result.then(res => {
+        window.location.reload();
+    });
 }
 
 const addNewRowToTable = toDoItem => {
@@ -163,17 +155,10 @@ const saveToDoItem = todoItem => {
 }
 
 const updateToDoItem = todoItem => {
-    const toDoList = readToDoData();
-    let updateToDoList = [];
-    for (item of toDoList) {
-        if (item.id == todoItem.id) {
-            updateToDoList.push(todoItem);
-        } else {
-            updateToDoList.push(item);
-        }
-    }
-    writeToDoData(updateToDoList);
-    window.location.reload();
+    const result = API_UPDATE(`todos/${todoItem.id}`, todoItem);
+    result.then(res => {
+        window.location.reload();
+    });
 }
 
 function editToDoItem(editButton) {
