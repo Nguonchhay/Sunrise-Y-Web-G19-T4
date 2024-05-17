@@ -1,11 +1,38 @@
 var todoId = 1;
 
-const readToDoData = () => {
-    const toDoList = localStorage.getItem('todo');
+const BASE_URL = 'https://coding-fairy.com/api/mock-api-resources/1715945679';
+
+const API_GET = async (path, params = {}) => {
+    const url = `${BASE_URL}/${path}`;
+    return await $.ajax({
+        url,
+        type: 'GET'
+    });
+}
+
+const API_POST = async (path, postData) => {
+    const url = `${BASE_URL}/${path}`;
+    return await $.ajax({
+        url,
+        type: 'POST',
+        data: postData
+    });
+}
+
+const API_UPDATE = (todoItem) => {
+    
+}
+
+const API_DELETE = (todoId) => {
+
+}
+
+const readToDoData = async () => {
+    const toDoList = await API_GET('todos');
     if (toDoList === null || toDoList === '') {
         return [];
     }
-    return JSON.parse(toDoList);
+    return toDoList;
 }
 
 const writeToDoData = toDoList => {
@@ -14,11 +41,13 @@ const writeToDoData = toDoList => {
 
 const loadDataToToDoTable = () => {
     const toDoList = readToDoData();
-    for (toDoItem of toDoList) {
-        addNewRowToTable(toDoItem);
-        todoId = toDoItem.id;
-    }
-    todoId++;
+    toDoList.then(data => {
+        for (toDoItem of data) {
+            addNewRowToTable(toDoItem);
+            todoId = toDoItem.id;
+        }
+        todoId++;
+    })
 }
 
 const closeModal = modalId => {
@@ -127,10 +156,10 @@ const addNewRowToTable = toDoItem => {
 }
 
 const saveToDoItem = todoItem => {
-    const toDoList = readToDoData();
-    toDoList.push(todoItem);
-    writeToDoData(toDoList);
-    todoId++;
+    const result = API_POST('todos', todoItem);
+    result.then(res => {
+        todoId++;
+    });
 }
 
 const updateToDoItem = todoItem => {
