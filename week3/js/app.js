@@ -82,14 +82,14 @@ const addNewRowToTable = toDoItem => {
 
     let btnEdit = document.createElement('button');
     btnEdit.className = 'btn btn-primary';
-    btnEdit.innerHTML = 'Edit';
+    btnEdit.innerHTML = '<i class="fa-solid fa-pencil"></i> Edit';
     btnEdit.onclick = () => {
         displayEditToDoItemForm(toDoItem);
     }
 
     let btnDelete = document.createElement('button');
     btnDelete.className = 'btn btn-danger';
-    btnDelete.innerHTML = 'Delete';
+    btnDelete.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
     btnDelete.onclick = () => {
         if (confirm('Are you sure?')) {
             removeRowFromTable(toDoItem.id);
