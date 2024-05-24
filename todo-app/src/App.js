@@ -9,6 +9,16 @@ function App() {
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
 
+  const onEditItem = item => {
+    setTitle(item.title);
+    setDueDate(item.dueDate);
+    setForm('edit');
+  }
+
+  const onDeleteItem = selectedId => {
+    setForm('delete');
+  }
+
   const renderToDoItem = (item) => {
     return (
       <tr key={item.id}>
@@ -18,8 +28,8 @@ function App() {
         <td>{item.dueDate}</td>
         <td>
           <div className="btn-group" role="group" aria-label="">
-            <button type="button" className="btn btn-primary">Edit</button>
-            <button type="button" className="btn btn-danger">Delete</button>
+            <button onClick={() => onEditItem(item)} type="button" className="btn btn-primary">Edit</button>
+            <button onClick={() => onDeleteItem(item.id)} type="button" className="btn btn-danger">Delete</button>
           </div>
         </td>
       </tr>
@@ -100,10 +110,54 @@ function App() {
     )
   }
 
+  const renderToDoEdit = () => {
+    return (
+      <div>
+        <h1 className="mt-5">Edit ToDo Item</h1>
+        <form>
+          <div className="mb-3">
+            <label htmlFor="newId" className="form-label">ID</label>
+            <input type="text" disabled className="form-control" id="newId" placeholder="Auto Generate"/>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="newTitle" className="form-label">Title *</label>
+            <input type="text" onChange={(e) => setTitle(e.target.value)} className="form-control" value={title}/>
+          </div>
+          <div className="mb-3">
+              <label htmlFor="newDueDate" className="form-label">Due Date *</label>
+              <input type="datetime-local" onChange={(e) => setDueDate(e.target.value)} className="form-control" value={dueDate}/>
+          </div>
+          <div className="mb-3">
+            <button onClick={() => setForm('list')} className="btn btn-default">Back to list</button>
+            <button onClick={onSaveToDo} className="btn btn-primary">Update</button>
+          </div>
+        </form>
+        
+      </div>
+    )
+  }
+
+  const renderToDoDelete = () => {
+    return (
+      <div>
+        <h1 className="mt-5">Delete ToDo Item</h1>
+        <p>Are you sure?</p>
+        <button onClick={() => setForm('list')} className="btn btn-default">No</button>
+        <button className="btn btn-danger">Yes</button>
+      </div>
+    )
+  }
+
   const renderContent = () => {
     switch (form) {
       case 'create':
         return renderToDoCreate();
+        break;
+      case 'edit':
+        return renderToDoEdit();
+        break;
+      case 'delete':
+        return renderToDoDelete();
         break;
       default:
         return renderToDoList();
