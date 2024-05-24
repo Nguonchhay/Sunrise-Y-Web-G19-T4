@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
 
 function App() {
 
   const [todos, setToDos] = useState([]);
   const [form, setForm] = useState('list');
+  const idRef = useRef(1);
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
 
@@ -31,7 +32,7 @@ function App() {
 
   const onSaveToDo = () => {
     const newToDoItem = {
-      'id': '',
+      id: idRef.current,
       title,
       dueDate,
       'status': 'TODO'
@@ -40,6 +41,10 @@ function App() {
       ...todos,
       newToDoItem
     ]);
+    // idRef.current = idRef.current + 1;
+    idRef.current += 1;
+    setTitle('');
+    setDueDate('');
     setForm('list');
   }
 
@@ -74,15 +79,15 @@ function App() {
         <h1 className="mt-5">New ToDo Item</h1>
         <form>
           <div className="mb-3">
-            <label for="newId" className="form-label">ID</label>
+            <label htmlFor="newId" className="form-label">ID</label>
             <input type="text" disabled className="form-control" id="newId" placeholder="Auto Generate"/>
           </div>
           <div className="mb-3">
-            <label for="newTitle" className="form-label">Title *</label>
+            <label htmlFor="newTitle" className="form-label">Title *</label>
             <input type="text" onChange={(e) => setTitle(e.target.value)} className="form-control" value={title}/>
           </div>
           <div className="mb-3">
-              <label for="newDueDate" className="form-label">Due Date *</label>
+              <label htmlFor="newDueDate" className="form-label">Due Date *</label>
               <input type="datetime-local" onChange={(e) => setDueDate(e.target.value)} className="form-control" value={dueDate}/>
           </div>
           <div className="mb-3">
