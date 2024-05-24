@@ -5,6 +5,8 @@ function App() {
 
   const [todos, setToDos] = useState([]);
   const [form, setForm] = useState('list');
+  const [title, setTitle] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
   const renderToDoItem = (item) => {
     return (
@@ -14,9 +16,9 @@ function App() {
         <td>{item.status}</td>
         <td>{item.dueDate}</td>
         <td>
-          <div class="btn-group" role="group" aria-label="">
-            <button type="button" class="btn btn-primary">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+          <div className="btn-group" role="group" aria-label="">
+            <button type="button" className="btn btn-primary">Edit</button>
+            <button type="button" className="btn btn-danger">Delete</button>
           </div>
         </td>
       </tr>
@@ -25,6 +27,20 @@ function App() {
 
   const renderToDos = () => {
     return todos.map(item => renderToDoItem(item) )
+  }
+
+  const onSaveToDo = () => {
+    const newToDoItem = {
+      'id': '',
+      title,
+      dueDate,
+      'status': 'TODO'
+    };
+    setToDos([
+      ...todos,
+      newToDoItem
+    ]);
+    setForm('list');
   }
 
 
@@ -55,8 +71,26 @@ function App() {
   const renderToDoCreate = () => {
     return (
       <div>
-        New todo
-        <button onClick={() => setForm('list')} className="btn btn-primary">Back to list</button>
+        <h1 className="mt-5">New ToDo Item</h1>
+        <form>
+          <div className="mb-3">
+            <label for="newId" className="form-label">ID</label>
+            <input type="text" disabled className="form-control" id="newId" placeholder="Auto Generate"/>
+          </div>
+          <div className="mb-3">
+            <label for="newTitle" className="form-label">Title *</label>
+            <input type="text" onChange={(e) => setTitle(e.target.value)} className="form-control" value={title}/>
+          </div>
+          <div className="mb-3">
+              <label for="newDueDate" className="form-label">Due Date *</label>
+              <input type="datetime-local" onChange={(e) => setDueDate(e.target.value)} className="form-control" value={dueDate}/>
+          </div>
+          <div className="mb-3">
+            <button onClick={() => setForm('list')} className="btn btn-default">Back to list</button>
+            <button onClick={onSaveToDo} className="btn btn-primary">Save</button>
+          </div>
+        </form>
+        
       </div>
     )
   }
