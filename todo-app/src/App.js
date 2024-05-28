@@ -20,6 +20,7 @@ function App() {
   }
 
   const onDeleteItem = selectedId => {
+    setId(selectedId);
     setForm('delete');
   }
 
@@ -81,6 +82,11 @@ function App() {
       ...updateToDos,
       editToDoItem
     ]);
+    setForm('list');
+  }
+
+  const onDeleteToDo = () => {
+    setToDos(todos.filter(item => item.id != id));
     setForm('list');
   }
 
@@ -177,7 +183,7 @@ function App() {
         <h1 className="mt-5">Delete ToDo Item</h1>
         <p>Are you sure?</p>
         <button onClick={() => setForm('list')} className="btn btn-default">No</button>
-        <button className="btn btn-danger">Yes</button>
+        <button onClick={onDeleteToDo} className="btn btn-danger">Yes</button>
       </div>
     )
   }
