@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import './App.css';
+import ToDoList from './components/ToDo/List';
 
 function App() {
 
@@ -205,11 +206,7 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <div className="col-6">
-        { renderContent() }
-      </div>
-    </div>
+    <ToDoList />
   );
 }
 
