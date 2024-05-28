@@ -6,12 +6,16 @@ function App() {
   const [todos, setToDos] = useState([]);
   const [form, setForm] = useState('list');
   const idRef = useRef(1);
+  const [id, setId] = useState(0);
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [status, setStatus] = useState('TO DO');
 
   const onEditItem = item => {
+    setId(item.id);
     setTitle(item.title);
     setDueDate(item.dueDate);
+    setStatus(item.status);
     setForm('edit');
   }
 
@@ -40,12 +44,19 @@ function App() {
     return todos.map(item => renderToDoItem(item) )
   }
 
+  const onCreate = () => {
+    setTitle('');
+    setDueDate('');
+    setStatus('TO DO');
+    setForm('create');
+  }
+
   const onSaveToDo = () => {
     const newToDoItem = {
       id: idRef.current,
       title,
       dueDate,
-      'status': 'TODO'
+      status
     };
     setToDos([
       ...todos,
@@ -55,6 +66,21 @@ function App() {
     idRef.current += 1;
     setTitle('');
     setDueDate('');
+    setForm('list');
+  }
+
+  const onUpdateToDo = () => {
+    const editToDoItem = {
+      id,
+      title,
+      dueDate,
+      status
+    };
+    const updateToDos = todos.filter(item => item.id != id);
+    setToDos([
+      ...updateToDos,
+      editToDoItem
+    ]);
     setForm('list');
   }
 
@@ -71,7 +97,7 @@ function App() {
               <th>Status</th>
               <th>Due Date</th>
               <th>
-                <button onClick={() => setForm('create')} className="btn btn-primary">+ New</button>
+                <button onClick={onCreate} className="btn btn-primary">+ New</button>
               </th>
             </tr>
           </thead>
@@ -117,7 +143,7 @@ function App() {
         <form>
           <div className="mb-3">
             <label htmlFor="newId" className="form-label">ID</label>
-            <input type="text" disabled className="form-control" id="newId" placeholder="Auto Generate"/>
+            <input type="text" disabled className="form-control" id="newId" value={id} placeholder="Auto Generate"/>
           </div>
           <div className="mb-3">
             <label htmlFor="newTitle" className="form-label">Title *</label>
@@ -128,8 +154,16 @@ function App() {
               <input type="datetime-local" onChange={(e) => setDueDate(e.target.value)} className="form-control" value={dueDate}/>
           </div>
           <div className="mb-3">
+            <label htmlFor="editStatus" className="form-label">Status *</label>
+            <select onChange={(e) => setStatus(e.target.value)} className="form-control">
+                <option selected={status == 'TO DO'} value="TO DO">TO DO</option>
+                <option selected={status == 'IN PROGRESS'} value="IN PROGRESS">IN PROGRESS</option>
+                <option selected={status == 'CLOSED'} value="CLOSED">CLOSED</option>
+            </select>
+          </div>
+          <div className="mb-3">
             <button onClick={() => setForm('list')} className="btn btn-default">Back to list</button>
-            <button onClick={onSaveToDo} className="btn btn-primary">Update</button>
+            <button onClick={onUpdateToDo} className="btn btn-primary">Update</button>
           </div>
         </form>
         
