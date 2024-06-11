@@ -11,6 +11,11 @@ const ToDoList = ({ todos, onSetForm, onSetId }) => {
         onSetId(selectedId);
     }
 
+    const onDelete = selectedId => {
+        onSetForm('delete');
+        onSetId(selectedId);
+    }
+
     const renderToDoItem = (item) => {
         return (
           <tr key={item.id}>
@@ -21,7 +26,7 @@ const ToDoList = ({ todos, onSetForm, onSetId }) => {
             <td>
               <div className="btn-group" role="group" aria-label="">
                 <button onClick={() => onEdit(item.id)} type="button" className="btn btn-primary">Edit</button>
-                <button onClick={() => {}} type="button" className="btn btn-danger">Delete</button>
+                <button onClick={() => onDelete(item.id)} type="button" className="btn btn-danger">Delete</button>
               </div>
             </td>
           </tr>

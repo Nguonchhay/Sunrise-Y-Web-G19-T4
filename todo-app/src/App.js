@@ -3,6 +3,7 @@ import './App.css';
 import ToDoList from './components/ToDo/List';
 import CreateToDo from './components/ToDo/CreateToDo';
 import EditToDo from './components/ToDo/EditToDo';
+import DeleteToDo from './components/ToDo/DeleteToDo';
 
 function App() {
 
@@ -37,23 +38,10 @@ function App() {
     setForm('list');
   }
 
-  // const onDeleteToDo = () => {
-  //   setToDos(todos.filter(item => item.id != id));
-  //   setForm('list');
-  // }
-
-
-
-  // const renderToDoDelete = () => {
-  //   return (
-  //     <div>
-  //       <h1 className="mt-5">Delete ToDo Item</h1>
-  //       <p>Are you sure?</p>
-  //       <button onClick={() => setForm('list')} className="btn btn-default">No</button>
-  //       <button onClick={onDeleteToDo} className="btn btn-danger">Yes</button>
-  //     </div>
-  //   )
-  // }
+  const onDeleteToDo = (selectedId) => {
+    setToDos(todos.filter(item => item.id != selectedId));
+    setForm('list');
+  }
 
   const onSaveToDo = item => {
     setToDos([
@@ -88,9 +76,13 @@ function App() {
           />
         );
         break;
-      // case 'delete':
-      //   return renderToDoDelete();
-      //   break;
+      case 'delete':
+        return <DeleteToDo 
+            onSetForm={setForm} 
+            selectedId={id} 
+            onDeleteToDo={onDeleteToDo}
+          />
+        break;
       default:
         return <ToDoList todos={todos} onSetId={setId} onSetForm={setForm} />;
     }
