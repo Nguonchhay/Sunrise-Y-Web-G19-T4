@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
-const ToDoList = ({ todos, onSetForm }) => {
+const ToDoList = ({ todos, onSetForm, onSetId }) => {
     
     const onCreate = () => {
         onSetForm('create');
+    }
+
+    const onEdit = (selectedId) => {
+        onSetForm('edit');
+        onSetId(selectedId);
     }
 
     const renderToDoItem = (item) => {
@@ -15,7 +20,7 @@ const ToDoList = ({ todos, onSetForm }) => {
             <td>{item.dueDate}</td>
             <td>
               <div className="btn-group" role="group" aria-label="">
-                <button onClick={() => {}} type="button" className="btn btn-primary">Edit</button>
+                <button onClick={() => onEdit(item.id)} type="button" className="btn btn-primary">Edit</button>
                 <button onClick={() => {}} type="button" className="btn btn-danger">Delete</button>
               </div>
             </td>
@@ -38,7 +43,7 @@ const ToDoList = ({ todos, onSetForm }) => {
                         <th>Status</th>
                         <th>Due Date</th>
                         <th>
-                        <button onClick={onCreate} className="btn btn-primary">+ New</button>
+                            <button onClick={onCreate} className="btn btn-primary">+ New</button>
                         </th>
                     </tr>
                 </thead>
