@@ -10,20 +10,11 @@ function App() {
   const [form, setForm] = useState('list');
   const [todos, setToDos] = useState([]);
   const [id, setId] = useState(1);
+  const idRef = useRef(1);
 
-
-  // const onDeleteItem = selectedId => {
-  //   setId(selectedId);
-  //   setForm('delete');
-  // }
-  
-
-  // const onCreate = () => {
-  //   setTitle('');
-  //   setDueDate('');
-  //   setStatus('TO DO');
-  //   setForm('create');
-  // }
+  const idIncrementByOne = () => {
+    idRef.current += 1;
+  }
 
   const onUpdateToDo = (editToDoItem) => {
     const updateToDos = [];
@@ -62,8 +53,8 @@ function App() {
           <CreateToDo 
             onSaveToDo={onSaveToDo} 
             onSetForm={setForm} 
-            id={id}
-            setId={setId}
+            latestId={idRef.current} 
+            onIdIncrement={idIncrementByOne}
           />
         );
         break;

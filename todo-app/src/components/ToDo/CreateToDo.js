@@ -1,25 +1,24 @@
 import React, { useState, useRef } from 'react';
 
-const CreateToDo = ({ id, setId, onSaveToDo, onSetForm }) => {
+const CreateToDo = ({ latestId, onIdIncrement, onSaveToDo, onSetForm }) => {
    
-    
     const [title, setTitle] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [status, setStatus] = useState('TO DO');
 
     const onSave = () => {
         const newToDoItem = {
-            id,
+            id: latestId + '',
             title,
             dueDate,
             status
         };
         onSaveToDo(newToDoItem);
-        setId(id + 1);
+        onIdIncrement();
         setTitle('');
         setDueDate('');
         onSetForm('list');
-  }
+    }
 
     return (
         <div>
