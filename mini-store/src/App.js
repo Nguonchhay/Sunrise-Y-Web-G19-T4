@@ -1,6 +1,9 @@
+import ContactUsPage from "./views/pages/ContactUsPage";
+import HomePage from "./views/pages/HomePage";
+
 const App = () => {
   return (
-    <h1>Home</h1>
+    <HomePage />
   );
 }
 
