@@ -20,6 +20,8 @@ const CreateToDo = ({ latestId, onIdIncrement, onSaveToDo, onSetForm }) => {
         onSetForm('list');
     }
 
+    console.log('Title', title);
+
     return (
         <div>
             <h1 className="mt-5">New ToDo Item</h1>
