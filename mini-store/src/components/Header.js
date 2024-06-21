@@ -40,26 +40,30 @@ export default function Header() {
                         <div className="user-items ps-5">
                         <ul className="d-flex justify-content-end list-unstyled">
                             <li className="search-item pe-3">
-                            <a href="#" className="search-button">
-                                <svg className="search">
-                                <use xlinkHref="#search" />
-                                </svg>
-                            </a>
-                            </li>
-                            <li className="pe-3">
-                            <a href="#">
-                                <svg className="user">
-                                <use xlinkHref="#user" />
-                                </svg>
-                            </a>
+                                <a href="#" className="search-button">
+                                    <svg className="search">
+                                    <use xlinkHref="#search" />
+                                    </svg>
+                                </a>
                             </li>
                             <li>
-                            <a href="cart.html">
-                                <svg className="cart">
-                                <use xlinkHref="#cart" />
-                                </svg>
-                            </a>
+                                <a href="cart.html">
+                                    <svg className="cart">
+                                    <use xlinkHref="#cart" />
+                                    </svg>
+                                </a>
                             </li>
+                            <li className="pe-3">
+                                <a href="#" style={ { paddingLeft: '1rem'} }>
+                                    Login
+                                </a>
+                            </li>
+                            <li className="pe-3">
+                                <a href="#">
+                                    Sign Up
+                                </a>
+                            </li>
+                            
                         </ul>
                         </div>
                     </li>
