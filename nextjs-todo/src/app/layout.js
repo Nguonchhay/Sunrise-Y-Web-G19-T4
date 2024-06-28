@@ -1,3 +1,4 @@
+import { ToDoProvider } from "@/contexts/ToDoContext";
 import "./globals.css";
 import Link from "next/link";
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children }) {
               </li>
             </ul>
           </div>
-          {children}
+          <ToDoProvider>
+            {children}
+          </ToDoProvider>
         </main>
       </body>
     </html>
