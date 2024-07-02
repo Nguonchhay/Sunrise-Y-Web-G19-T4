@@ -1,8 +1,10 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/navigation';
 
 export default function CreateToDo() {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -11,6 +13,7 @@ export default function CreateToDo() {
     
     const onSubmit = data => {
         console.log('data', data);
+        router.push('/todos');
     }
     
     return (

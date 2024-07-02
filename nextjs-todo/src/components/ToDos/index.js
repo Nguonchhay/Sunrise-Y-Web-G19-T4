@@ -1,10 +1,22 @@
-"use client";
-
 import Link from 'next/link';
-import useToDoContext from '@/contexts/ToDoContext';
+// import useToDoContext from '@/contexts/ToDoContext';
 
-export default function ToDoList() {
-    const { todos } = useToDoContext();
+async function getToDoData() {
+    const res = await fetch('https://coding-fairy.com/api/mock-api-resources/1715945679/todos')
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+   
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+   
+    return res.json()
+}
+
+export default async function ToDoList() {
+    const data = await getToDoData();
+    const todos  = data;
     return (
         <div>
             <table className="table-auto bg-white border border-gray-300">
