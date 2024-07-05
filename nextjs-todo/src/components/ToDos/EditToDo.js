@@ -24,7 +24,7 @@ export default function EditToDo({ item }) {
             }
         );
         if (!res.ok) {
-            throw new Error('Failed to store data')
+            throw new Error('Failed to update data')
         }
         router.push('/todos');
     }
