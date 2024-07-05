@@ -33,7 +33,7 @@ export default async function ToDoList() {
                 <tbody>
                     {
                         todos.map(item => (
-                            <tr>
+                            <tr key={item.id}>
                                 <td className="border border-gray-300 px-4 py-2">{item.id}</td>
                                 <td className="border border-gray-300 px-4 py-2">{item.title}</td>
                                 <td className="border border-gray-300 px-4 py-2">{item.dueDate}</td>
