@@ -2,32 +2,33 @@
 
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/navigation';
+import { getToDoById } from '@/app/actions';
+import { useEffect } from "react";
 
-export default function CreateToDo() {
+export default function EditToDo({ todoId }) {
     const router = useRouter();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     
-    const onSubmit = async (data) => {
-        const res = await fetch(
-            'https://coding-fairy.com/api/mock-api-resources/1715945679/todos',
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(data)
-            }
-        );
-        if (!res.ok) {
-            throw new Error('Failed to store data')
-        }
-        router.push('/todos');
+    
+    const onSubmit = data => {
+        const result = storeToDo(data);
+        console.log('result', result);
+        // router.push('/todos');
     }
+
+    useEffect(async () => {
+        async function getToDo() {
+            const todo = await getToDoById(todoId);
+            return todo;
+        }
+        
+        getToDo();
+    }, []);
     
     return (
         <div>

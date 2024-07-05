@@ -2,16 +2,16 @@ import Link from 'next/link';
 // import useToDoContext from '@/contexts/ToDoContext';
 
 async function getToDoData() {
-    const res = await fetch('https://coding-fairy.com/api/mock-api-resources/1715945679/todos')
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
+    const res = await fetch('https://coding-fairy.com/api/mock-api-resources/1715945679/todos', {
+        cache: 'no-store'
+    })
    
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data')
     }
    
-    return res.json()
+    return res.json();
 }
 
 export default async function ToDoList() {
@@ -39,7 +39,7 @@ export default async function ToDoList() {
                                 <td className="border border-gray-300 px-4 py-2">{item.dueDate}</td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     <div>
-                                        <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="/todos/{item.id}">Edit</Link>
+                                        <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href={ `/todos/${item.id}` }>Edit</Link>
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" type="button">Delete</button>
                                     </div>
                                 </td>

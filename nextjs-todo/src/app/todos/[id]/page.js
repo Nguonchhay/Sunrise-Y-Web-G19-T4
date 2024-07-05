@@ -1,9 +1,12 @@
-export default function EditToDo({ params }) {
+import EditToDo from "@/components/ToDos/EditToDo";
+
+export default function EditToDoPage({ params }) {
     const todoId = parseInt(params.id);
-    console.log("Selected ID : ", todoId);
+    
     return (
         <div>
             <h2>Edit To Do</h2>
+            <EditToDo todoId={todoId} />
         </div>
     );
 }
