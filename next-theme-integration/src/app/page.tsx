@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import HomeHeroImage from "./../../public/theme/images/hero.png";
+import Feature1Image from "./../../public/theme/images/feature-1.png";
+import Feature2Image from "./../../public/theme/images/feature-2.png";
 
 export const metadata: Metadata = {
   title: "Home - LandWind",
@@ -23,7 +27,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img src="./images/hero.png" alt="hero image" />
+            <Image width={520} height={402} src={HomeHeroImage} alt="hero image" />
           </div>                
         </div>
       </section>
@@ -116,11 +120,11 @@ export default function HomePage() {
               </ul>
               <p className="mb-8 font-light lg:text-xl">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.</p>
             </div>
-            <img className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="./images/feature-1.png" alt="dashboard feature image" />
+            <Image width={800} height={400} className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src={Feature1Image} alt="dashboard feature image" />
           </div>
           {/* Row */}
           <div className="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-            <img className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="./images/feature-2.png" alt="feature image 2" />
+            <Image width={800} height={400} className="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src={Feature2Image} alt="feature image 2" />
             <div className="text-gray-500 sm:text-lg dark:text-gray-400">
               <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">We invest in the world’s potential</h2>
               <p className="mb-8 font-light lg:text-xl">Deliver great service experiences fast - without the complexity of traditional ITSM solutions. Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
@@ -211,7 +215,7 @@ export default function HomePage() {
               <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor" />
             </svg> 
             <blockquote>
-              <p className="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">"Landwind is just awesome. It contains tons of predesigned components and pages starting from login screen to complex dashboard. Perfect choice for your next SaaS application."</p>
+              <p className="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">&quot;Landwind is just awesome. It contains tons of predesigned components and pages starting from login screen to complex dashboard. Perfect choice for your next SaaS application.&quot;</p>
             </blockquote>
             <figcaption className="flex items-center justify-center mt-6 space-x-3">
               <img className="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture" />
@@ -235,7 +239,7 @@ export default function HomePage() {
                   <svg data-accordion-icon className="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
                 </button>
               </h3>
-              <div id="accordion-flush-body-1" className aria-labelledby="accordion-flush-heading-1">
+              <div id="accordion-flush-body-1" aria-labelledby="accordion-flush-heading-1">
                 <div className="py-5 border-b border-gray-200 dark:border-gray-700">
                   <p className="mb-2 text-gray-500 dark:text-gray-400">Landwind is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
                   <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
