@@ -37,9 +37,10 @@ export default function RootLayout({
         <Script src="https://buttons.github.io/buttons.js" />
       </head>
       <body className={inter.className}>
-        <Header />
+        {
+          // Check is Home
+        }
         {children}
-        <Footer/>
         <Script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js" />
       </body>
     </html>
