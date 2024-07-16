@@ -24,13 +24,13 @@ export default function RootLayout({
             <Link href="/">1. Fetch at Server component</Link>
           </li>
           <li>
-            <Link href="/client">2. Fetch at Server component using actions.ts</Link>
+            <Link href="/">2. Fetch at Server component using actions.ts</Link>
           </li>
           <li>
-            <Link href="/">3. Fetch at Client component</Link>
+            <Link href="/client">3. Fetch at Client component</Link>
           </li>
           <li>
-            <Link href="/">4. Fetch at Client component using actions.ts</Link>
+            <Link href="/client/actions">4. Fetch at Client component using actions.ts</Link>
           </li>
           <li>
             <Link href="/">5. Fetch from own RESTful API</Link>

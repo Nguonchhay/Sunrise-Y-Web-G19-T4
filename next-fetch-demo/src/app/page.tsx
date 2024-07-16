@@ -1,7 +1,11 @@
 import ToDoList from "@/components/ToDoList";
 
 const fetchToDos = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos', {
+    headers: {
+      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+    }
+  });
   if (!res.ok) {
     throw new Error('Cannot fetch data on Server side');
   }
