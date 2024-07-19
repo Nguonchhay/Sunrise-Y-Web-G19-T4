@@ -28,3 +28,10 @@ export function GET(request: NextApiRequest) {
         }
     ]);
 }
+
+export async function POST(request: Request) {
+    const data = await request.json();
+    // Connect to database or other services
+
+    return Response.json(data);
+}
