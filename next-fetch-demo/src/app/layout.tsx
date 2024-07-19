@@ -33,7 +33,7 @@ export default function RootLayout({
             <Link href="/client/actions">4. Fetch at Client component using actions.ts</Link>
           </li>
           <li>
-            <Link href="/">5. Fetch from own RESTful API</Link>
+            <Link href="/own-api">5. Fetch from own RESTful API</Link>
           </li>
         </ul>
         {children}
