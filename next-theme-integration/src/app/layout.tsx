@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import Script from 'next/script'
 import "./globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,9 +36,7 @@ export default function RootLayout({
         <Script src="https://buttons.github.io/buttons.js" />
       </head>
       <body className={inter.className}>
-        {
-          // Check is Home
-        }
+        <Header />
         {children}
         <Script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js" />
       </body>
